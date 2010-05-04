@@ -6,7 +6,7 @@ function ProductsPresenter(productsView, productsService) {
     };
 
     function retrieveBooks() {
-        productsService.getBooksListing();
+        productsService.getBooksListing(displayContentListing);
     }
 
     function retrieveCDs() {
@@ -15,5 +15,9 @@ function ProductsPresenter(productsView, productsService) {
 
     function retrieveDVDs() {
 
+    }
+
+    function displayContentListing(contentListing) {
+        productsView.displayContentListing(contentListing);
     }
 }

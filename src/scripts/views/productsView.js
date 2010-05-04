@@ -15,7 +15,7 @@ function ProductsView() {
 
     };
 
-    this.setCurrentPage = function(pageDataToDisplay) {
+    this.displayContentListing = function(pageDataToDisplay) {
         
     }
 }
