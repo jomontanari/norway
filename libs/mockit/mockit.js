@@ -1,10 +1,21 @@
-function Arg(type) {
+function Arg(){}
+
+function TypeArg(type) {
     this.expectedType = type;
 }
 
+function FunctionArg(predicate) {
+    this.predicate = predicate;
+}
+
 Arg.isA = function(type) {
-    return new Arg(type)
+    return new TypeArg(type);
 };
+
+Arg.satisfies = function(predicate) {
+    return new FunctionArg(predicate);
+};
+
 function ArgumentMatcher() {
     var typeMatchers = {};
 
@@ -20,14 +31,16 @@ function ArgumentMatcher() {
 
     function initMatchers() {
         typeMatchers[Array] = matchArrays;
-        typeMatchers[String] = matchObjects;
-        typeMatchers[Boolean] = matchObjects;
-        typeMatchers[Number] = matchObjects;
-        typeMatchers[Arg] = matchType;
+        typeMatchers[TypeArg] = matchType;
+        typeMatchers[FunctionArg] = matchPredicate;
     }
 
     function checkArguments(expected, actual) {
-        var typeMatcher = typeMatchers[expected.constructor];
+        if (expected == null) {
+            return actual == null;    
+        }
+
+        var typeMatcher = typeMatchers[expected.constructor] || matchObjects;
 
         return typeMatcher(expected, actual);
     }
@@ -56,6 +69,10 @@ function ArgumentMatcher() {
 
     function matchType(expected, actual) {
         return expected.expectedType === actual.constructor;
+    }
+
+    function matchPredicate(expected, actual) {
+        return expected.predicate(actual);
     }
 }
 function Discrepancy(message) {
@@ -103,9 +120,7 @@ function DynamicExpectationMatcher() {
 }
 function FrameworkIntegration() {
     this.fail = function(discrepancy) {
-        if (JSpec != undefined) {
-            JSpec.fail(discrepancy.getMessage());
-        }
+        fail(discrepancy.getMessage());
     };
 
     this.pass = function(discrepancy) {
@@ -208,7 +223,7 @@ function MockControl(frameworkIntegration) {
 function MockHelper() {}
 
 MockHelper.isPublicMethod = function(object, method) {
-    return typeof object[method] === 'function' && object.hasOwnProperty(method);
+    return typeof object[method] === 'function';
 };
 
 MockHelper.findAll = function(array, predicate) {
@@ -291,6 +306,7 @@ function MockInitialiser() {
         mock.expects = expects;
         mock.tells = tells;
         mock.toReturn = toReturn;
+        mock.toReturnNext = toReturnNext;
         mock.toThrow = toThrow;
         mock.toExecute = toExecute;
         mock.verify = verify;
@@ -355,17 +371,6 @@ function MockInitialiser() {
         }
     }
 
-    function findValueToReturn(valuesToReturn) {
-        if (valuesToReturn instanceof Array) {
-            if (valuesToReturn.length == 1) {
-                return valuesToReturn[0];    
-            }
-            return valuesToReturn.shift();
-        }
-
-        return valuesToReturn;
-    }
-
     function expects() {
         this.recording = true;
         return this;
@@ -378,7 +383,16 @@ function MockInitialiser() {
     }
 
     function toReturn(valueToReturn) {
-        this.toExecute(function() { return findValueToReturn(valueToReturn); });
+        this.toExecute(function() { return valueToReturn; });
+    }
+
+    function toReturnNext(valuesToReturn) {
+        this.toExecute(function() {
+            if (valuesToReturn.length == 1) {
+                return valuesToReturn[0];
+            }
+            return valuesToReturn.shift();
+        });
     }
 
     function toThrow(error) {
