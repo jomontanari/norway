@@ -18,18 +18,22 @@ function ShoppingCart() {
 $(document).ready(function() {
 
     var cart = new ShoppingCart();
+    
     $(".buy").live("submit", function(event) {
 
-        var item = {description: $(".buy [name='title']").val(),
-                    price: $(".buy [name='price']").val()};
+        var item = {description: $(".buy [name='description']").val(),
+                    price: parseInt($(".buy [name='price']").val()) };
 
         cart.add(item);
 
-        $(".itemList").append(item.description)
+        $(".itemList ul").append("<li>");
+        $(".itemList ul li:last")
+                .append(item.description)
                 .append(" - ")
                 .append(item.price);
+        $(".itemList ul").append("</li>");
 
-        $(".totalPrice").append("Total price:" + cart.orderPrice());
+        $(".totalPrice").text("Total price: " + cart.orderPrice());
         
         event.preventDefault();
     });

@@ -38,9 +38,19 @@
             <td>blah</td>
             <td>12</td>
             <td>
-                <form action="/item/add/123" method="POST" class="buy">
-                    <input type="hidden" name="title" value="blah"/>
+                <form action="/item/add/123" method="POST" class="buy" value="buy">
+                    <input type="hidden" name="description" value="blah"/>
                     <input type="hidden" name="price" value="12"/>
+                    <input type="submit">
+                </form>
+            </td>
+        </tr><tr>
+            <td>more blah lah</td>
+            <td>42</td>
+            <td>
+                <form action="/item/add/123" method="POST" class="buy" value="buy">
+                    <input type="hidden" name="description" value="blah"/>
+                    <input type="hidden" name="price" value="42"/>
                     <input type="submit">
                 </form>
             </td>
@@ -49,23 +59,15 @@
 </div>
 
 <div>
-    <div class="book">
-        <input type="hidden" value="bookguid1"/>
-        <a href="/buy/book/1"> buy a book</a>
-        <input type="button" value="buy a book"/>
-
-        <div class="cd">
-            <a href="/buy/cd/4"> buy a cd</a>
-        </div>
-    </div>
-
     <div id="right-hand" class="shoppingCart">
             <h3>
                 Shopping Cart
             </h3>
             <div class="itemList" >
-
+                <ul>
+                </ul>
             </div>
+            <br>
             <div class="totalPrice">
             </div>
     </div>
