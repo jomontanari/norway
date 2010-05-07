@@ -5,8 +5,8 @@ function ProductsPresenter(productsView, productsService) {
         productsView.addDVDCategoryHandler(retrieveDVDs);
     };
 
-    function retrieveBooks() {
-        productsService.getBooksListing(displayContentListing);
+    function retrieveBooks(a) {
+        productsService.getBooksListing(a.href, displayContentListing);
     }
 
     function retrieveCDs() {

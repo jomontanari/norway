@@ -1,10 +1,6 @@
 function ProductsView() {
     this.addBooksCategoryHandler = function(callback) {
-        
-    };
-
-    this.addBooksCategoryHandler = function(callback) {
-
+        $("#book-listing").click(callback);    
     };
 
     this.addCDCategoryHandler = function(callback) {
@@ -16,6 +12,7 @@ function ProductsView() {
     };
 
     this.displayContentListing = function(pageDataToDisplay) {
+        $("#centre").innerHTML(pageDataToDisplay);
         
     }
 }

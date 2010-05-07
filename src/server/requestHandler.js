@@ -11,6 +11,7 @@ function initHandlers() {
     handlers["/books/list"] = returnBookListing;
     handlers["/cds/list"] = returnCDListing;
     handlers["/dvds/list"] = returnDVDListing;
+    handlers["*.js"] = returnDVDListing;
 
     return handlers;
 }
@@ -44,7 +45,7 @@ function writeResponse(fileName, response) {
 
 exports.returnHandler = function(uri) {
     sys.print('Locating handler for uri: ' + uri + "\n");
-//    var handlers = initHandlers();
+
 
     var handler =  handlers[uri];
 
