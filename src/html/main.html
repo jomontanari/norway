@@ -25,14 +25,51 @@
                 </li>
             </ul>
         </div>
-        <div id="centre">
 
+        <div id="centre">
+            <!-- this table will be dynamic thanks to Brian's funky node.js stuff -->
+            <table border="1">
+                <thead>
+                <tr>
+                    <th>title</th>
+                    <th>price</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>blah</td>
+                    <td>12</td>
+                    <td>
+                        <form action="/item/add/123" method="POST" class="buy" value="buy">
+                            <input type="hidden" name="description" value="blah"/>
+                            <input type="hidden" name="price" value="12"/>
+                            <input type="submit">
+                        </form>
+                    </td>
+                </tr><tr>
+                    <td>more blah lah</td>
+                    <td>42</td>
+                    <td>
+                        <form action="/item/add/123" method="POST" class="buy" value="buy">
+                            <input type="hidden" name="description" value="blah"/>
+                            <input type="hidden" name="price" value="42"/>
+                            <input type="submit">
+                        </form>
+                    </td>
+                </tr>
+            </table>
         </div>
-        <div id="right-hand">
-            <div>
-                <h3>
-                    Shopping Cart
-                </h3>
+
+        <div id="right-hand" class="shoppingCart">
+            <h3>
+                Shopping Cart
+            </h3>
+            <div class="itemList" >
+                <ul>
+                </ul>
+            </div>
+            <br>
+            <div class="totalPrice">
             </div>
         </div>
     </body>
