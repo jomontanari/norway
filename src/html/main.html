@@ -4,15 +4,17 @@
     <head>
         <title>Books R Us - Books, CD's, DVD's</title>
 
-        <script type="text/javascript" src="../../libs/jquery-1.3.2.js"></script>
+        <script type="text/javascript" src="../scripts/lib/jquery-1.3.2.js"></script>
         <script type="text/javascript" src="../scripts/presenters/productsPresenter.js"></script>
         <script type="text/javascript" src="../scripts/views/productsView.js"></script>
         <script type="text/javascript" src="../scripts/models/productsService.js"></script>
         <script type="text/javascript" src="../scripts/bookstore.js"></script>
+
+        <!--<link rel="stylesheet" href="../css/main.css"/>-->
     </head>
 
     <body>
-        <div id="left-hand">
+        <div class="left-hand">
             <ul>
                 <li>
                     <a id="book-listing" href="/books/list">Books</a>
@@ -26,7 +28,7 @@
             </ul>
         </div>
 
-        <div id="centre">
+        <div class="centre">
             <!-- this table will be dynamic thanks to Brian's funky node.js stuff -->
             <table border="1">
                 <thead>
@@ -60,7 +62,7 @@
             </table>
         </div>
 
-        <div id="right-hand" class="shoppingCart">
+        <div class="right-hand shoppingCart">
             <h3>
                 Shopping Cart
             </h3>

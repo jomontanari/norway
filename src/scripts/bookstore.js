@@ -4,7 +4,7 @@ function ShoppingCart() {
 
     this.add = function(item) {
         items.push(item);
-    }
+    };
 
     this.orderPrice = function() {
         var price = 0;
@@ -16,6 +16,8 @@ function ShoppingCart() {
 }
 
 $(document).ready(function() {
+    new ProductsPresenter(new ProductsView(), new ProductsService()).init();
+    
     var cart = new ShoppingCart();
     
     $(".buy").live("submit", function(event) {

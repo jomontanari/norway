@@ -1,20 +1,14 @@
 function ProductsPresenter(productsView, productsService) {
     this.init = function() {
-        productsView.addBooksCategoryHandler(retrieveBooks);
-        productsView.addCDCategoryHandler(retrieveCDs);
-        productsView.addDVDCategoryHandler(retrieveDVDs);
+        productsView.addBooksCategoryHandler(retrieveCategoryListing);
+        productsView.addCDCategoryHandler(retrieveCategoryListing);
+        productsView.addDVDCategoryHandler(retrieveCategoryListing);
     };
 
-    function retrieveBooks(a) {
-        productsService.getBooksListing(a.href, displayContentListing);
-    }
+    function retrieveCategoryListing(e) {
+        e.preventDefault();
 
-    function retrieveCDs() {
-
-    }
-
-    function retrieveDVDs() {
-
+        productsService.getCategoryListing(e.currentTarget.href, displayContentListing);
     }
 
     function displayContentListing(contentListing) {

@@ -120,7 +120,7 @@ function DynamicExpectationMatcher() {
 }
 function FrameworkIntegration() {
     this.fail = function(discrepancy) {
-        fail(discrepancy.getMessage());
+        JSpec.fail(discrepancy.getMessage());
     };
 
     this.pass = function(discrepancy) {
@@ -149,14 +149,14 @@ function InvocationBehaviour(caller, method, args) {
 
         return caller == other.getCaller() &&
                method === other.getMethod() &&
-               argumentMatcher.areEqual(MockHelper.convertToArray(args), MockHelper.convertToArray(other.getArgs()));
+               argumentMatcher.areEqual(args, other.getArgs());
     };
 
     this.toString = function() {
         var toStr = caller + "." + method;
 
         if (args.length !== 0) {
-            toStr = toStr + '(' + formatArgs() + ')';
+            toStr = toStr + "(" + formatArgs() + ")";
         }else {
             toStr = toStr + "()";
         }
@@ -168,7 +168,11 @@ function InvocationBehaviour(caller, method, args) {
         var toStr = "";
 
         for (var i = 0; i < args.length; i++) {
-            toStr += args[i] + ",";
+            if (typeof(args[i]) === 'string') {
+                toStr += "'" + args[i] + "', ";
+            } else {
+                toStr += args[i] + ", ";
+            }
         }
 
         return toStr.substring(0, toStr.lastIndexOf(","));
@@ -218,12 +222,28 @@ function MockControl(frameworkIntegration) {
         }
 
         framework.pass();
+
+        mocks = [];
     };
 }
 function MockHelper() {}
 
 MockHelper.isPublicMethod = function(object, method) {
     return typeof object[method] === 'function';
+};
+
+MockHelper.find = function(array, predicate) {
+    var returnValues = [];
+
+    for (var i = 0; i < array.length; i++) {
+        var currentItem = array[i];
+
+        if (predicate(currentItem)) {
+            return currentItem;
+        }
+    }
+
+    return null;
 };
 
 MockHelper.findAll = function(array, predicate) {
@@ -259,33 +279,33 @@ MockHelper.nextOrLast = function(values) {
 };
 function MockInitialiser() {
     this.initStrictMock = function(mock, thingToMock) {
-        return initMock(mock, thingToMock, new StrictExpectationMatcher());
+        return initMock(mock, thingToMock, true);
     };
 
     this.initDynamicMock = function(mock, thingToMock) {
-        return initMock(mock, thingToMock, new DynamicExpectationMatcher());
+        return initMock(mock, thingToMock, false);
     };
 
-    function initMock(mock, thingToMock, expectationMatcher) {
-        addStateVariables(mock, expectationMatcher);
+    function initMock(mock, thingToMock, strict) {
         backupOriginalFunctions(mock, thingToMock);
+        addStateVariables(mock, strict);
         replaceFunctions(mock, thingToMock);
-        addApiFunctions(mock, thingToMock);
+        addApiFunctions(mock, thingToMock, strict);
 
         return mock;
     }
 
-    function addStateVariables(mock, expectationMatcher) {
+    function addStateVariables(mock, strict) {
         mock.recording = false;
         mock.beingTold = false;
-        mock.lastCalledMethodName = null;
-        mock.lastExpectedBehaviour = null;
+        mock.lastMockedBehaviour = null;
         mock.calls = [];
-        mock.originalFunctions = {};
-        mock.expectationMatcher = expectationMatcher;
+        mock.expectationMatcher = strict ? new StrictExpectationMatcher() : new DynamicExpectationMatcher();
     }
 
     function backupOriginalFunctions(mock, thingToMock) {
+        mock.originalFunctions = {};
+
         for (var method in thingToMock) {
             mock.originalFunctions[method] = thingToMock[method];
         }
@@ -302,9 +322,8 @@ function MockInitialiser() {
         }
     }
     
-    function addApiFunctions(mock, thingToMock) {
+    function addApiFunctions(mock, thingToMock, strict) {
         mock.expects = expects;
-        mock.tells = tells;
         mock.toReturn = toReturn;
         mock.toReturnNext = toReturnNext;
         mock.toThrow = toThrow;
@@ -315,9 +334,14 @@ function MockInitialiser() {
         mock.threeTimes = threeTimes;
         mock.verify = verify;
         mock.restoreOriginalFunctions = restoreOriginalFunctions;
-        
+        mock.removeAddedApi = removeAddedApi;
+
+        if (!strict) {
+            mock.tells = tells;
+        }
+
         mock.toString = function toString() {
-            return thingToMock.name;
+            return thingToMock.name || typeof(thingToMock);
         }
     }
 
@@ -333,25 +357,32 @@ function MockInitialiser() {
         var mockedFunction = function() {
             if (mock.recording) {
                 mock.recording = false;
-                mock.lastCalledMethodName = method;
-                mock.lastExpectedBehaviour = new InvocationBehaviour(mock, method, arguments);
+                mock.lastMockedBehaviour = new InvocationBehaviour(mock, method, MockHelper.convertToArray(arguments));
 
-                mock.expectationMatcher.addExpectedMethodCall(mock.lastExpectedBehaviour);
+                mock.expectationMatcher.addExpectedMethodCall(mock.lastMockedBehaviour);
 
                 return this;
             } else if (mock.beingTold) {
                 mock.beingTold = false;
-                mock.lastCalledMethodName = method;
+                mock.lastMockedBehaviour = new InvocationBehaviour(mock, method, MockHelper.convertToArray(arguments));
 
                 return this;
             } else {
-                mock.expectationMatcher.addActualMethodCall(new InvocationBehaviour(mock, method, arguments));
+                var actualMethodBehaviour = new InvocationBehaviour(mock, method, MockHelper.convertToArray(arguments));
 
-                if (mock.calls[method] !== undefined) {
-                    var returnFunction = MockHelper.nextOrLast(mock.calls[method]);
+                mock.expectationMatcher.addActualMethodCall(actualMethodBehaviour);
 
-                    if (typeof(returnFunction) == 'function') {
-                        return returnFunction.apply(this, arguments);
+                var methodCalls = mock.calls[method];
+
+                if (methodCalls !== undefined) {
+                    var argumentMatcher = new ArgumentMatcher();
+
+                    var result = MockHelper.find(methodCalls, function(result) {
+                        return argumentMatcher.areEqual(result.args, actualMethodBehaviour.getArgs());
+                    });
+
+                    if (result != null) {
+                        return result.action.apply(this, arguments);
                     }
                 }
             }
@@ -362,12 +393,14 @@ function MockInitialiser() {
     }
 
     function initialiseCallArray() {
-        if (this.lastCalledMethodName == undefined) {
+        if (this.lastMockedBehaviour == undefined) {
             throw new Error("Expect not called on mock. Usage is mock.expects().expectedFunctionName()");
         }
 
-        if (this.calls[this.lastCalledMethodName] === undefined) {
-            this.calls[this.lastCalledMethodName] = [];
+        var methodName = this.lastMockedBehaviour.getMethod();
+        
+        if (this.calls[methodName] === undefined) {
+            this.calls[methodName] = [];
         }
     }
 
@@ -406,28 +439,35 @@ function MockInitialiser() {
 
         initialiseCallArray.apply(this, arguments);
 
-        this.calls[this.lastCalledMethodName].push(function() { return closure.apply(this, arguments); });
+        this.calls[this.lastMockedBehaviour.getMethod()].push({
+            args : this.lastMockedBehaviour.getArgs(),
+            action : function() { return closure.apply(this, arguments); }
+        });
     }
 
     function verify(){
+        var verificationSuccessful = this.expectationMatcher.verify();
+
+        this.removeAddedApi();
         this.restoreOriginalFunctions();
-        return this.expectationMatcher.verify();
+
+        return verificationSuccessful;
     }
 
     function once() {
-        this.lastExpectedBehaviour.setRepeats(1);
+        this.lastMockedBehaviour.setRepeats(1);
 
         return this;
     }
 
     function twice() {
-        this.lastExpectedBehaviour.setRepeats(2);
+        this.lastMockedBehaviour.setRepeats(2);
 
         return this;
     }
 
     function threeTimes() {
-        this.lastExpectedBehaviour.setRepeats(3);
+        this.lastMockedBehaviour.setRepeats(3);
 
         return this;
     }
@@ -436,6 +476,31 @@ function MockInitialiser() {
         for (var method in this.originalFunctions) {
             this[method] = this.originalFunctions[method];
         }
+
+        delete this.originalFunctions;
+        delete this.restoreOriginalFunctions;
+    }
+
+    function removeAddedApi() {
+        delete this.recording;
+        delete this.beingTold;
+        delete this.lastMockedBehaviour;
+        delete this.calls;
+        delete this.expectationMatcher;
+
+        delete this.expects;
+        delete this.toReturn;
+        delete this.toReturnNext;
+        delete this.toThrow;
+        delete this.toExecute;
+        delete this.verify;
+        delete this.once;
+        delete this.twice;
+        delete this.threeTimes;
+        delete this.verify;
+        delete this.removeAddedApi;
+        delete this.tells;
+        delete this.toString;
     }
 }
 function StrictExpectationMatcher() {

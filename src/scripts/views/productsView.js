@@ -1,18 +1,24 @@
 function ProductsView() {
     this.addBooksCategoryHandler = function(callback) {
-        $("#book-listing").click(callback);    
+        $(ProductsView.Ids.BookListingAnchor).click(callback);
     };
 
     this.addCDCategoryHandler = function(callback) {
-
+        $(ProductsView.Ids.CDListingAnchor).click(callback);
     };
 
     this.addDVDCategoryHandler = function(callback) {
-
+        $(ProductsView.Ids.DVDListingAnchor).click(callback);
     };
 
     this.displayContentListing = function(pageDataToDisplay) {
-        $("#centre").innerHTML(pageDataToDisplay);
-        
+        $(ProductsView.Ids.ContentArea).html(pageDataToDisplay);
     }
 }
+
+ProductsView.Ids = {
+    ContentArea : ".centre",
+    BookListingAnchor : "#book-listing",
+    CDListingAnchor : "#cd-listing",
+    DVDListingAnchor : "#dvd-listing"
+};

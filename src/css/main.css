@@ -1,0 +1,17 @@
+div.container {
+    width: 100%;
+}
+
+div.left-hand {
+    float : left;
+    width:auto;
+}
+
+div.right-hand {
+    float: right;
+    width:auto;
+}
+
+div.centre {
+    margin:0 auto
+}

@@ -1,5 +1,5 @@
 function ProductsService() {
-    this.getBooksListing = function(url, callback) {
+    this.getCategoryListing = function(url, callback) {
         $.get(url, {}, callback, 'GET');        
     }
 }
