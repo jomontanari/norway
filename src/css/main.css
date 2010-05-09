@@ -15,3 +15,7 @@ div.right-hand {
 div.centre {
     margin:0 auto
 }
+
+div.shoppingCart {
+    float:right;
+}
