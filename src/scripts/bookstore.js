@@ -22,8 +22,8 @@ $(document).ready(function() {
     
     $(".buy").live("submit", function(event) {
 
-        var item = {description: $(".buy [name='description']").val(),
-                    price: parseInt($(".buy [name='price']").val()) };
+        var item = {description: this["description"].value,
+                    price: parseInt(this["price"].value) };
 
         cart.add(item);
 
