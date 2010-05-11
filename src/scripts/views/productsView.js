@@ -17,7 +17,7 @@ function ProductsView() {
 }
 
 ProductsView.Ids = {
-    ContentArea : ".centre",
+    ContentArea : "#content",
     BookListingAnchor : "#book-listing",
     CDListingAnchor : "#cd-listing",
     DVDListingAnchor : "#dvd-listing"

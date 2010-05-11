@@ -1,0 +1,5 @@
+task :default => [:run_tests]
+
+task :run_tests do
+  exec 'jspec run --browsers firefox'
+end

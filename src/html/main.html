@@ -10,7 +10,7 @@
         <script type="text/javascript" src="../scripts/models/productsService.js"></script>
         <script type="text/javascript" src="../scripts/bookstore.js"></script>
 
-        <!--<link rel="stylesheet" href="../css/main.css"/>-->
+        <link rel="stylesheet" href="../css/main.css"/>
     </head>
 
     <body>
@@ -29,6 +29,18 @@
         </div>
 
         <div class="centre">
+            <div id="criteria">
+                <label for="sort-criteria">Sort by:</label>
+                <select id="sort-criteria">
+                    <option value="1" selected="true">Price - ascending</option>
+                    <option value="2">Price - ascending</option>
+                    <option value="3">Published data</option>
+                    <option value="4">Author</option>
+                </select>
+            </div>
+
+            <div id="content">
+            </div>
         </div>
 
         <div class="shoppingCart">
