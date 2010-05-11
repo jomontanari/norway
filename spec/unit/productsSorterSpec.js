@@ -57,4 +57,15 @@ describe "Products Sorter"
         result[2].price.should.eql 5
         result[3].price.should.eql 1
     end
+
+    it "Should sort products by author"
+        var productsSorter = new ProductsSorter();
+        var result = productsSorter.sort(products, "3");
+
+        result.length.should.eql 4
+        result[0].author.should.eql "Doe, Bob"
+        result[1].author.should.eql "Doe, Jane"
+        result[2].author.should.eql "Fox, Roger"
+        result[3].author.should.eql "Parker, Peter"
+    end
 end

@@ -17,15 +17,20 @@ function ProductsSorter() {
         var sortFunctions = [];
         sortFunctions["1"] = sortByPriceDescending;
         sortFunctions["2"] = sortByPriceAscending;
+        sortFunctions["3"] = sortByAuthor;
 
         return sortFunctions;
     }
 
     function sortByPriceDescending(data) {
-        data.sort(function(a, b) { return a.price - b.price});
+        data.sort(function(a, b) { return a.price - b.price; });
     }
 
     function sortByPriceAscending(data) {
-        data.sort(function(a, b) { return b.price - a.price});
+        data.sort(function(a, b) { return b.price - a.price; });
+    }
+
+    function sortByAuthor(data) {
+        data.sort(function(a, b) { return a.author.localeCompare(b.author); });
     }
 }
