@@ -1,8 +1,6 @@
 function ProductsPresenter(productsView, productsService) {
     this.init = function() {
-        productsView.addBooksCategoryHandler(retrieveCategoryListing);
-        productsView.addCDCategoryHandler(retrieveCategoryListing);
-        productsView.addDVDCategoryHandler(retrieveCategoryListing);
+        productsView.addCategoryListingHandlers(retrieveCategoryListing);
     };
 
     function retrieveCategoryListing(e) {

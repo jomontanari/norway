@@ -1,14 +1,6 @@
 function ProductsView() {
-    this.addBooksCategoryHandler = function(callback) {
-        $(ProductsView.Ids.BookListingAnchor).click(callback);
-    };
-
-    this.addCDCategoryHandler = function(callback) {
-        $(ProductsView.Ids.CDListingAnchor).click(callback);
-    };
-
-    this.addDVDCategoryHandler = function(callback) {
-        $(ProductsView.Ids.DVDListingAnchor).click(callback);
+    this.addCategoryListingHandlers = function(callback) {
+        $(ProductsView.Ids.CategoryListingAnchors).click(callback);
     };
 
     this.displayContentListing = function(pageDataToDisplay) {
@@ -17,8 +9,6 @@ function ProductsView() {
 }
 
 ProductsView.Ids = {
-    ContentArea : ".content",
-    BookListingAnchor : "#book-listing",
-    CDListingAnchor : "#cd-listing",
-    DVDListingAnchor : "#dvd-listing"
+    ContentArea : ".centre",
+    CategoryListingAnchors : "a.category-listing"
 };
