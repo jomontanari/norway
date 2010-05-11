@@ -2,9 +2,15 @@ div.container {
     width: 100%;
 }
 
+div.title {
+    margin:2px;
+}
+
 div.left-hand {
-    float : left;
-    width:auto;
+    float: left;
+    width:80px;
+    background: lightgray;
+    margin-right:5px;
 }
 
 div.right-hand {
@@ -16,6 +22,6 @@ div.centre {
     margin:0 auto
 }
 
-div.shoppingCart {
+div.right-hand {
     float:right;
 }

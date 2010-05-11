@@ -9,11 +9,13 @@
         <script src="../src/scripts/presenters/productsPresenter.js"></script>
         <script src="../src/scripts/views/productsView.js"></script>
         <script src="../src/scripts/models/productsService.js"></script>
+        <script src="../src/scripts/models/productsSorter.js"></script>
         <script>
 			function runSuites() {
 				JSpec
                 .exec('unit/productsViewSpec.js')
                 .exec('unit/productsPresenterSpec.js')
+                .exec('unit/productsSorterSpec.js')
 				.run({ fixturePath: 'fixtures', verbose:true, failuresOnly:false })
 				.report();
 			}
