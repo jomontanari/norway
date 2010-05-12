@@ -1,7 +1,7 @@
 function ProductsPresenter(productsView, productsService) {
     this.init = function() {
         productsView.addCategoryListingHandlers(retrieveCategoryListing);
-        productsView.addSortHandler(sortCategory);
+//        productsView.addSortHandler(sortCategory);
     };
 
     function retrieveCategoryListing(e) {
