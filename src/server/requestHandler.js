@@ -5,12 +5,12 @@ var fs = require("fs"),
 
 exports.returnHandlers = function() {
     return [[get("/"), returnIndex],
-        [get("/books/list"), returnBookListing],
-        [get("/cds/list"), returnCDListing],
-        [get("/dvds/list"), returnDVDListing],
-        [get(/.+\.jpg/), returnJpegContent],
-        [get(/.+\.js/), returnJavascriptContent],
-        [get(/.+\.css/), returnCSSContent]];
+            [get("/books/list"), returnBookListing],
+            [get("/cds/list"), returnCDListing],
+            [get("/dvds/list"), returnDVDListing],
+            [get(/.+\.jpg/), returnJpegContent],
+            [get(/.+\.js/), returnJavascriptContent],
+            [get(/.+\.css/), returnCSSContent]];
 };
 
 function returnIndex(request, response) {
