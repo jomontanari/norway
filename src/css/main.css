@@ -1,21 +1,41 @@
 div.container {
-    width: 100%;
+    position:relative;
+    text-align:left;
+    width:100%;
+}
+
+div.title {
+    margin:2px;
 }
 
 div.left-hand {
-    float : left;
-    width:auto;
+    background:none repeat scroll 0 0 #ECB9E8;
+    float:left;
+    left:-10px;
+    margin:0 0 -10px;
+    padding:10px;
+    position:relative;
+    top:-10px;
+    voice-family:inherit;
+    width:200px;
+    z-index:100;
 }
 
 div.right-hand {
-    float: right;
-    width:auto;
+    background:none repeat scroll 0 0 #D7C4FA;
+    float:right;
+    margin:0 0 -10px;
+    padding:10px;
+    position:relative;
+    right:-10px;
+    top:-10px;
+    voice-family:inherit;
+    width:200px;
+    z-index:99;
 }
 
 div.centre {
-    margin:0 auto
+    padding:0 240px;
+    position:relative;
 }
 
-div.shoppingCart {
-    float:right;
-}

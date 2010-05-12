@@ -9,34 +9,14 @@ describe "Products View"
         mockControl.verify();
     end
 
-    it "Should add a listener to the book listing anchor"
+    it "Should add category listing listeners"
         var callback = function() {};
 
-        jQueryMock.tells().init(ProductsView.Ids.BookListingAnchor, undefined).toReturn(jQueryMock);
+        jQueryMock.tells().init(ProductsView.Ids.CategoryListingAnchors, undefined).toReturn(jQueryMock);
         jQueryMock.expects().click(callback);
 
         var productsView = new ProductsView();
-        productsView.addBooksCategoryHandler(callback);
-    end
-
-    it "Should add a listener to the cd listing anchor"
-        var callback = function() {};
-
-        jQueryMock.tells().init(ProductsView.Ids.CDListingAnchor, undefined).toReturn(jQueryMock);
-        jQueryMock.expects().click(callback);
-
-        var productsView = new ProductsView();
-        productsView.addCDCategoryHandler(callback);
-    end
-
-    it "Should add a listener to the dvd listing anchor"
-        var callback = function() {};
-
-        jQueryMock.tells().init(ProductsView.Ids.DVDListingAnchor, undefined).toReturn(jQueryMock);
-        jQueryMock.expects().click(callback);
-
-        var productsView = new ProductsView();
-        productsView.addDVDCategoryHandler(callback);
+        productsView.addCategoryListingHandlers(callback);
     end
 
     it "Should display the passed content listing in the centre of the page"

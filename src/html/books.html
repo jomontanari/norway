@@ -1,6 +1,14 @@
 <div>
-    <h1>Books</h1>
-
+    <div id="criteria">
+        <label for="sort-criteria">Sort by:</label>
+        <select id="sort-criteria">
+            <option value="1" selected="true">Price - ascending</option>
+            <option value="2">Price - ascending</option>
+            <option value="3">Author</option>
+        </select>
+        <input id="sort-button" type="button" value="Go!">
+    </div>
+    
     <table border="1">
         <thead>
         <tr>
@@ -10,8 +18,13 @@
         </tr>
         </thead>
         <tr>
-            <td>blah</td>
-            <td>12</td>
+            <td>
+                <img src="../images/the_definitive_guide.jpg" alt="Javascript: The definitive guide"/>
+            </td>
+            
+            <td>
+                <h5>Javascript: The definitive guide</h5>
+            </td>
             <td>
                 <form action="/item/add/123" method="POST" class="buy" value="buy">
                     <input type="hidden" name="description" value="blah"/>
@@ -21,8 +34,40 @@
             </td>
         </tr>
         <tr>
-            <td>more blah lah</td>
-            <td>42</td>
+            <td>
+                <img src="../images/for_web_devs.jpg" alt="Javascript: For web developers"/>
+            </td>
+            <td>
+                <h5>Javascript: For web developers</h5>
+            <td>
+                <form action="/item/add/123" method="POST" class="buy" value="buy">
+                    <input type="hidden" name="description" value="more blah lah"/>
+                    <input type="hidden" name="price" value="42"/>
+                    <input type="submit">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="../images/missing_manual.jpg" alt="Javascript: The missing manual"/>
+            </td>
+            <td>
+                <h5>Javascript: The missing manual</h5>
+            <td>
+                <form action="/item/add/123" method="POST" class="buy" value="buy">
+                    <input type="hidden" name="description" value="more blah lah"/>
+                    <input type="hidden" name="price" value="42"/>
+                    <input type="submit">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="../images/the_good_parts.jpg" alt="Javascript: The good parts"/>
+            </td>
+            <td>
+                <h5>Javascript: The good parts</h5>
+                <h5>Javascript: The good parts</h5>
             <td>
                 <form action="/item/add/123" method="POST" class="buy" value="buy">
                     <input type="hidden" name="description" value="more blah lah"/>
