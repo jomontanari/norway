@@ -21,7 +21,7 @@ div.left-hand {
     z-index:100;
 }
 
-div.right-hand {
+div.shoppingCart {
     background:none repeat scroll 0 0 #D7C4FA;
     float:right;
     margin:0 0 -10px;
