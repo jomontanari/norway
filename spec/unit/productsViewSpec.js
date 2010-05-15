@@ -2,7 +2,7 @@ describe "Products View"
     before_each
         mockControl = new MockControl();
 
-        jQueryMock = mockControl.createDynamicMock($.fn);
+        domMock = mockControl.createDynamicMock(Browser.Dom);
     end
 
     after_each
@@ -12,8 +12,7 @@ describe "Products View"
     it "Should add category listing listeners"
         var callback = function() {};
 
-        jQueryMock.tells().init(ProductsView.Ids.CategoryListingAnchors, undefined).toReturn(jQueryMock);
-        jQueryMock.expects().click(callback);
+        domMock.expects().addClickHandler(ProductsView.Ids.CategoryListingAnchors, callback);
                                      
         var productsView = new ProductsView();
         productsView.addCategoryListingHandlers(callback);
@@ -22,24 +21,21 @@ describe "Products View"
     it "Should add the sort listeners"
         var callback = function() {};
 
-        jQueryMock.tells().init(ProductsView.Ids.SortButton, undefined).toReturn(jQueryMock);
-        jQueryMock.expects().click(callback);
+        domMock.expects().addClickHandler(ProductsView.Ids.SortButton, callback);
 
         var productsView = new ProductsView();
         productsView.addSortHandler(callback);
     end
 
     it "Should return the selected sort option"
-        jQueryMock.tells().init(ProductsView.Ids.SortOptions, undefined).toReturn(jQueryMock);
-        jQueryMock.expects().val().toReturn("1");
+        domMock.expects().getValue(ProductsView.Ids.SortOptions).toReturn("1");
 
         var productsView = new ProductsView();
         productsView.getSelectedSortOption().should.eql "1"
     end
 
     it "Should display the passed content listing in the centre of the page"
-        jQueryMock.tells().init(ProductsView.Ids.ContentArea, undefined).toReturn(jQueryMock);
-        jQueryMock.expects().html("Hello");
+        domMock.expects().setHtml(ProductsView.Ids.ContentArea,"Hello");
 
         var productsView = new ProductsView();
         productsView.setContentListing("Hello");

@@ -1,23 +1,23 @@
 function ProductsView() {
     this.addCategoryListingHandlers = function(callback) {
-        $(ProductsView.Ids.CategoryListingAnchors).click(callback);
+        Browser.Dom.addClickHandler(ProductsView.Ids.CategoryListingAnchors, callback);
     };
 
     this.addSortHandler = function(callback) {
-        $(ProductsView.Ids.SortButton).click(callback);
+        Browser.Dom.addClickHandler(ProductsView.Ids.SortButton, callback);
     };
 
     this.getSelectedSortOption = function() {
-        return $(ProductsView.Ids.SortOptions).val();
+        return Browser.Dom.getValue(ProductsView.Ids.SortOptions);
     };
 
     this.setContentListing = function(pageDataToDisplay) {
-        $(ProductsView.Ids.ContentArea).html(pageDataToDisplay);
+        Browser.Dom.setHtml(ProductsView.Ids.ContentArea, pageDataToDisplay);
     };
 
     this.enableSortOptions = function() {
-        $(ProductsView.Ids.SortOptions).removeAttr("disabled");
-        $(ProductsView.Ids.SortButton).removeAttr("disabled");
+        Browser.Dom.enable(ProductsView.Ids.SortButton);
+        Browser.Dom.enable(ProductsView.Ids.SortOptions);
     }
 }
 
