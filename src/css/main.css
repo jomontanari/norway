@@ -39,3 +39,39 @@ div.centre {
     position:relative;
 }
 
+div.criteria {
+    background:lightgray;
+}
+
+table {
+    width:100%;
+}
+
+table tr {
+    border-top: lightgray 1px solid;
+    border-bottom: lightgray 1px solid;
+}
+
+tr.even {
+    background: lightgray;
+}
+
+td.image {
+    width:100px;
+}
+
+td.name {
+    vertical-align:text-top;
+    padding-left: 5px;
+}
+
+td.price {
+    width:80px;
+    text-align:center;
+}
+
+td.buy {
+    width:80px;
+    text-align:center;
+}
+

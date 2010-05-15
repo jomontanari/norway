@@ -11,18 +11,18 @@ function ProductsView() {
         return $(ProductsView.Ids.SortOptions).val();
     };
 
-
     this.setContentListing = function(pageDataToDisplay) {
         $(ProductsView.Ids.ContentArea).html(pageDataToDisplay);
     };
 
-    this.getContentListing = function(pageDataToDisplay) {
-        $(ProductsView.Ids.ContentArea).html(pageDataToDisplay);
+    this.enableSortOptions = function() {
+        $(ProductsView.Ids.SortOptions).removeAttr("disabled");
+        $(ProductsView.Ids.SortButton).removeAttr("disabled");
     }
 }
 
 ProductsView.Ids = {
-    ContentArea : ".centre",
+    ContentArea : ".content",
     CategoryListingAnchors : "a.category-listing",
     SortButton : "#sort-button",
     SortOptions : "#sort-criteria"

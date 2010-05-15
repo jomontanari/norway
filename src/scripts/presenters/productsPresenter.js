@@ -18,6 +18,7 @@ function ProductsPresenter(productsView, productsService, productsSorter) {
         contentListingData = JSON.parse(contentListing);
         
         productsView.setContentListing(tableBuilder.buildTable(contentListingData));
+        productsView.enableSortOptions();
     }
 
     function sortCategory() {

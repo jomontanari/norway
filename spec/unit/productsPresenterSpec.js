@@ -21,6 +21,7 @@ describe "Products Presenter"
         var productsServiceMock = mockControl.createStrictMock(ProductsService);
         var eventMock = mockControl.createStrictMock(new Event("/books/list"));
 
+        productsViewMock.expects().enableSortOptions();
         productsViewMock.expects().setContentListing(tableBuilder.buildTable(contentListingData));
         productsViewMock.expects().addCategoryListingHandlers(Arg.isA(Function)).toExecute(function(callback) {
             hrefClickSimulator = callback;

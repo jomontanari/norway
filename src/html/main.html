@@ -36,18 +36,18 @@
                 </ul>
             </div>
 
-            <div id="criteria">
-                <label for="sort-criteria">Sort by:</label>
-                <select id="sort-criteria">
-                    <option value="1" selected="true">Price - ascending</option>
-                    <option value="2">Price - descending</option>
-                    <option value="3">Author</option>
-                </select>
-                <input id="sort-button" type="button" value="Go!">
-            </div>
-
-            
             <div class="centre">
+                <div class="criteria">
+                    <label for="sort-criteria">Sort by:</label>
+                    <select id="sort-criteria" disabled="disabled">
+                        <option value="1" selected="true">Price - ascending</option>
+                        <option value="2">Price - descending</option>
+                        <option value="3">Author</option>
+                    </select>
+                    <input id="sort-button" type="button" value="Go!" disabled="disabled">
+                </div>
+
+                <div class="content"></div>
             </div>
 
             <div class="shoppingCart">
