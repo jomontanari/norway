@@ -38,23 +38,62 @@ function returnBookListing(request, response) {
             price: 22
         },
         {
-            id: 3,
+            id: 4,
             image: "../images/the_good_parts.jpg",
             name: "Javascript: The good parts",
             price: 12
         }
     ];
 
-    sys.puts(JSON.stringify(books));
     sendResponse(response, JSON.stringify(books), 200, 'text/plain', "UTF-8");
 }
 
 function returnCDListing(request, response) {
-    writeTextResponse("html/cds.html", response, 'text/html');
+    var cds = [
+        {
+            id: 1,
+            image: "../images/acdc.jpg",
+            name: "AC/DC : Iron Man 2",
+            price: 12.99
+        },
+        {
+            id: 2,
+            image: "../images/muse.jpg",
+            name: "Muse: Absolution",
+            price: 10.99
+        },
+        {
+            id: 3,
+            image: "../images/iron_maiden.jpg",
+            name: "Iron Maiden: Brave New World",
+            price: 5.99
+        }
+    ];
+    sendResponse(response, JSON.stringify(cds), 200, 'text/plain', 'UTF-8');
 }
 
 function returnDVDListing(request, response) {
-    writeTextResponse("html/dvds.html", response, 'text/html');
+    var dvds = [
+        {
+            id: 1,
+            image: "../images/sherlock_holmes.jpg",
+            name: "Sherlock Holmes",
+            price: 9.99
+        },
+        {
+            id: 2,
+            image: "../images/avatar.jpg",
+            name: "Avatar",
+            price: 9.99
+        },
+        {
+            id: 3,
+            image: "../images/2012.jpg",
+            name: "2012",
+            price: 9.85
+        }
+    ];
+    sendResponse(response, JSON.stringify(dvds), 200, 'text/plain', 'UTF-8');
 }
 
 function returnJavascriptContent(request, response) {
