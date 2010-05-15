@@ -1,20 +1,9 @@
-function TableBuilder() {
-    var headers = [];
+function TableBuilder(tableHeaders) {
+    var headers = tableHeaders;
     var rows = [];
 
-    this.withHeaders = function(values) {
-        headers = values;
 
-        return this;
-    };
-
-    this.withRows = function(values) {
-        rows = values;
-
-        return this;
-    };
-
-    this.now = function() {
+    this.buildTable = function(rows) {
         var returnString = "<table>";
 
         if (headers.length > 0) {
@@ -29,17 +18,19 @@ function TableBuilder() {
 
 
         if (rows.length > 0) {
-            returnString += "<tbody><tr>";
+            returnString += "<tbody>";
 
             for (var i = 0; i < rows.length; i++) {
                 var rowData = rows[i];
 
-                for (var fieldName in rowData) {
-                    returnString += "<td>" + rowData[fieldName] + "</td>";
-                }
+                returnString += "<tr>";
+                returnString += "<td><img src=" + rowData.image + " alt=" + rowData.name + "/></td>";
+                returnString += "<td><h5>" + rowData.name + "</h5></td>";
+                returnString += "<td>" + rowData.price + "</td>";
+                returnString += "</tr>";
             }
 
-            returnString += "</tr></tbody>";
+            returnString += "</tbody>";
         }
 
         return returnString;

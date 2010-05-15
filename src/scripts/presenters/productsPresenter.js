@@ -1,7 +1,11 @@
-function ProductsPresenter(productsView, productsService) {
+function ProductsPresenter(productsView, productsService, productsSorter) {
+    var contentListingData = null;
+    var tableBuilder = new TableBuilder(["Cover", "Name", "Price"]);
+
+
     this.init = function() {
         productsView.addCategoryListingHandlers(retrieveCategoryListing);
-//        productsView.addSortHandler(sortCategory);
+        productsView.addSortHandler(sortCategory);
     };
 
     function retrieveCategoryListing(e) {
@@ -11,13 +15,15 @@ function ProductsPresenter(productsView, productsService) {
     }
 
     function displayContentListing(contentListing) {
-        productsView.displayContentListing(contentListing);
+        contentListingData = JSON.parse(contentListing);
+        
+        productsView.setContentListing(tableBuilder.buildTable(contentListingData));
     }
 
     function sortCategory() {
-        var sortOption = productsView.getSelectedSortOption();
-        var categoryListing = productsView.getCategoryListing();
+        var sortedData = productsSorter.sort(contentListingData, productsView.getSelectedSortOption());
 
-        sortProducts
+        productsView.setContentListing(tableBuilder.buildTable(sortedData));
+    
     }
 }

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    new ProductsPresenter(new ProductsView(), new ProductsService()).init();
+    new ProductsPresenter(new ProductsView(), new ProductsService(), new ProductsSorter()).init();
 
     var cart = new ShoppingCart();
     $(".buy").live("submit", function(event) {

@@ -1,7 +1,8 @@
 function ProductsSorter() {
     var sortFunctions = initSortFunctions();
 
-    this.sort = function(data, sortType) {
+    this.
+            sort = function(data, sortType) {
         var sorter = sortFunctions[sortType];
 
         if (sorter == null) {
@@ -17,7 +18,7 @@ function ProductsSorter() {
         var sortFunctions = [];
         sortFunctions["1"] = sortByPriceDescending;
         sortFunctions["2"] = sortByPriceAscending;
-        sortFunctions["3"] = sortByAuthor;
+        sortFunctions["3"] = sortByName;
 
         return sortFunctions;
     }
@@ -30,7 +31,7 @@ function ProductsSorter() {
         data.sort(function(a, b) { return b.price - a.price; });
     }
 
-    function sortByAuthor(data) {
-        data.sort(function(a, b) { return a.author.localeCompare(b.author); });
+    function sortByName(data) {
+        data.sort(function(a, b) { return a.name.localeCompare(b.name); });
     }
 }

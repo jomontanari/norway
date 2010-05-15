@@ -14,7 +14,7 @@ describe "Products View"
 
         jQueryMock.tells().init(ProductsView.Ids.CategoryListingAnchors, undefined).toReturn(jQueryMock);
         jQueryMock.expects().click(callback);
-
+                                     
         var productsView = new ProductsView();
         productsView.addCategoryListingHandlers(callback);
     end
@@ -24,6 +24,6 @@ describe "Products View"
         jQueryMock.expects().html("Hello");
 
         var productsView = new ProductsView();
-        productsView.displayContentListing("Hello");
+        productsView.setContentListing("Hello");
     end
 end

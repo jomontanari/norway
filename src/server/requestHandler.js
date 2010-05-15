@@ -5,12 +5,12 @@ var fs = require("fs"),
 
 exports.returnHandlers = function() {
     return [[get("/"), returnIndex],
-            [get("/books/list"), returnBookListing],
-            [get("/cds/list"), returnCDListing],
-            [get("/dvds/list"), returnDVDListing],
-            [get(/.+\.jpg/), returnJpegContent],
-            [get(/.+\.js/), returnJavascriptContent],
-            [get(/.+\.css/), returnCSSContent]];
+        [get("/books/list"), returnBookListing],
+        [get("/cds/list"), returnCDListing],
+        [get("/dvds/list"), returnDVDListing],
+        [get(/.+\.jpg/), returnJpegContent],
+        [get(/.+\.js/), returnJavascriptContent],
+        [get(/.+\.css/), returnCSSContent]];
 };
 
 function returnIndex(request, response) {
@@ -18,7 +18,35 @@ function returnIndex(request, response) {
 }
 
 function returnBookListing(request, response) {
-    writeTextResponse("html/books.html", response, 'text/html');
+    var books = [
+        {
+            id: 1,
+            image: "../images/the_definitive_guide.jpg",
+            name: "Javascript: The definitive guide",
+            price: 42
+        },
+        {
+            id: 2,
+            image: "../images/for_web_devs.jpg",
+            name: "Javascript: For web developers",
+            price: 42
+        },
+        {
+            id: 3,
+            image: "../images/missing_manual.jpg",
+            name: "Javascript: The missing manual",
+            price: 22
+        },
+        {
+            id: 3,
+            image: "../images/the_good_parts.jpg",
+            name: "Javascript: The good parts",
+            price: 12
+        }
+    ];
+
+    sys.puts(JSON.stringify(books));
+    sendResponse(response, JSON.stringify(books), 200, 'text/plain', "UTF-8");
 }
 
 function returnCDListing(request, response) {
@@ -47,7 +75,7 @@ function writeTextResponse(fileName, response, contentType) {
 
 function writeBinaryResponse(fileName, response, contentType) {
     streamFile(fileName, 'binary', response, contentType);
-}                      
+}
 
 function streamFile(fileName, encoding, response, contentType) {
     sys.log("Returning filename: " + fileName + "\n");
@@ -60,12 +88,18 @@ function streamFile(fileName, encoding, response, contentType) {
             data = "Unable to find file : " + fileName;
         }
 
-        response.sendHeader(responseCode, [
-            ["Content-Type", contentType],
-            ["Content-Length", data.length]
-        ]);
-        response.write(data, encoding);
-        response.end();
+        sendResponse(response, data, responseCode, contentType, encoding);
     });
+}
+
+function sendResponse(response, data, responseCode, contentType, encoding) {
+    response.sendHeader(responseCode, [
+        ["Content-Type", contentType],
+        ["Content-Length", data.length]
+    ]);
+    response.write(data, encoding);
+    response.end();
+
+    sys.puts(contentType);
 }
 

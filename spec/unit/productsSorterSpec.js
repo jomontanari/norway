@@ -2,24 +2,24 @@ describe "Products Sorter"
     before_each
         products = [
                     {
-                        imageUrl : "http://hostname/images/image1.jpg",
+                        imageUrl : "http://hostname/images/image2.jpg",
                         price: 5,
-                        author: "Doe, Bob"
+                        name: "Book 2"
                     },
                     {
-                        imageUrl : "http://hostname/images/image2.jpg",
+                        imageUrl : "http://hostname/images/image1.jpg",
                         price: 8,
-                        author: "Doe, Jane"
+                        name: "Book 1"
                     },
                     {
                         imageUrl : "http://hostname/images/image3.jpg",
                         price: 1,
-                        author: "Parker, Peter"
+                        name: "Book 3"
                     },
                     {
                         imageUrl : "http://hostname/images/image3.jpg",
                         price: 5,
-                        author: "Fox, Roger"
+                        name: "Book 4"
                     }
                    ];
     end
@@ -58,14 +58,14 @@ describe "Products Sorter"
         result[3].price.should.eql 1
     end
 
-    it "Should sort products by author"
+    it "Should sort products by name"
         var productsSorter = new ProductsSorter();
         var result = productsSorter.sort(products, "3");
 
         result.length.should.eql 4
-        result[0].author.should.eql "Doe, Bob"
-        result[1].author.should.eql "Doe, Jane"
-        result[2].author.should.eql "Fox, Roger"
-        result[3].author.should.eql "Parker, Peter"
+        result[0].name.should.eql "Book 1"
+        result[1].name.should.eql "Book 2"
+        result[2].name.should.eql "Book 3"
+        result[3].name.should.eql "Book 4"
     end
 end
