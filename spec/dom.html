@@ -8,6 +8,7 @@
         <script src="../src/scripts/lib/jquery-1.3.2.js"></script>
         <script src="../src/scripts/lib/browser.js"></script>
         <script src="../src/scripts/lib/dom.js"></script>
+        <script src="../src/scripts/lib/http.js"></script>
         <script src="../src/scripts/presenters/productsPresenter.js"></script>
         <script src="../src/scripts/views/productsView.js"></script>
         <script src="../src/scripts/models/productsService.js"></script>
@@ -16,9 +17,12 @@
         <script>
 			function runSuites() {
 				JSpec
-                .exec('unit/productsViewSpec.js')
-                .exec('unit/productsPresenterSpec.js')
-                .exec('unit/productsSorterSpec.js')
+//                .exec('unit/productsViewSpec.js')
+//                .exec('unit/productsPresenterSpec.js')
+//                .exec('unit/productsSorterSpec.js')
+//                .exec('unit/productsServiceSpec.js')
+//                .exec('unit/domSpec.js')
+                .exec('unit/httpSpec.js')
 				.run({ fixturePath: 'fixtures', verbose:true, failuresOnly:false })
 				.report();
 			}

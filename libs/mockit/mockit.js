@@ -335,7 +335,7 @@ function MockInitialiser() {
     function replaceFunctions(mock, thingToMock) {
         if (typeof(thingToMock) == 'function') {
             createMethods(thingToMock, mock);
-            createMethods(new thingToMock(), mock);
+//            createMethods(new thingToMock(), mock);
         }else if (typeof(thingToMock) == 'object') {
             createMethods(thingToMock, mock);
         }else {
