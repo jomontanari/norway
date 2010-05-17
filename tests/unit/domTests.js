@@ -1,47 +1,47 @@
-describe "Dom"
-    before_each
+TestCase("DomTests", {
+    setUp : function() {
         mockControl = new MockControl();
 
         jQueryMock = mockControl.createDynamicMock($.fn);
-    end
+    },      
 
-    after_each
+    tearDown : function() { 
         mockControl.verify();
-    end
-
-    it "Should register the passed function as a listener to the click event of the element"
+    },
+    
+    test_should_register_the_passed_function_as_a_listener_to_the_click_event_of_the_element : function() {
         var selector = ".class-name";
 
         jQueryMock.expects().init(selector, null).toReturn(jQueryMock);
         jQueryMock.expects().click(Arg.isA(Function));
 
         Browser.Dom.addClickHandler(selector, function() {});
-    end
+    },
 
-    it "Should set the passed html on the element"
+    test_should_set_the_passed_html_on_the_element : function() {
         var selector = ".class-name";
 
         jQueryMock.expects().init(selector, null).toReturn(jQueryMock);
         jQueryMock.expects().html("html");
 
         Browser.Dom.setHtml(selector, "html");
-    end
+    },
 
-    it "Should return the value of the element"
+    test_should_return_the_value_of_the_element : function() {
         var selector = ".class-name";
 
         jQueryMock.expects().init(selector, null).toReturn(jQueryMock);
         jQueryMock.expects().val().toReturn("1");
 
-        Browser.Dom.getValue(selector).should.eql "1"
-    end
+        assertEquals("1", Browser.Dom.getValue(selector));
+    },
 
-    it "Should enable the passed element"
+    test_should_enable_the_passed_element : function() {
         var selector = ".class-name";
 
         jQueryMock.expects().init(selector, null).toReturn(jQueryMock);
         jQueryMock.expects().removeAttr("disabled");
 
         Browser.Dom.enable(selector);
-    end
-end
+    }
+});

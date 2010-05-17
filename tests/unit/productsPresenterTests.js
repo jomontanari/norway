@@ -1,5 +1,5 @@
-describe "Products Presenter"
-    before_each
+TestCase("ProductsPresenter", {
+    setUp :function() {
         mockControl = new MockControl();
 
         tableBuilder = new TableBuilder(["Cover", "Name", "Price"]);
@@ -10,13 +10,13 @@ describe "Products Presenter"
         hrefClickSimulator = null;
         searchSuccessResultSimulator = null;
         sortClickedSimulator = null;
-    end
+    },
 
-    after_each
+    tearDown : function() {
         mockControl.verify();
-    end
+    },
 
-    it 'Should display the category page listing when a category listing link is clicked'
+    test_should_display_the_category_page_listing_when_a_category_listing_link_is_clicked : function() {
         var productsViewMock = mockControl.createDynamicMock(ProductsView);
         var productsServiceMock = mockControl.createStrictMock(ProductsService);
         var eventMock = mockControl.createStrictMock(new Event("/books/list"));
@@ -38,9 +38,9 @@ describe "Products Presenter"
 
         hrefClickSimulator(eventMock);
         searchSuccessResultSimulator(JSON.stringify(contentListingData));
-    end
+    },
 
-    it 'Should sort the products by ascending price when the the ascending option is selected and sort is clicked'
+    test_should_sort_the_products_by_ascending_price_when_the_the_ascending_option_is_selected_and_sort_is_clicked : function() {
         var sortedContentListingData = [
                                   { imageUrl: "http://localhost/image2.jpeg", name: "Book2", price: "£8.99" },
                                   { imageUrl: "http://localhost/image1.jpeg", name: "Book1", price: "£22.99" }
@@ -74,5 +74,5 @@ describe "Products Presenter"
         hrefClickSimulator(new Event("/books/list"));
         searchSuccessResultSimulator(JSON.stringify(contentListingData));
         sortClickedSimulator();
-    end
-end
+    }
+});

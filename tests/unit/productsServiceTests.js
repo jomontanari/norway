@@ -1,20 +1,20 @@
-describe "Product Service"
-    before_each
+TestCase("ProductService", {
+    setUp : function() {
         mockControl = new MockControl();
 
         httpMock = mockControl.createDynamicMock(Browser.HTTP);
-    end
+    },
 
-    after_each
+    tearDown : function() {
         mockControl.verify();
-    end
+    },
 
-    it "Should load the the category listing for the passed url"
+    test_should_load_the_the_category_listing_for_the_passed_url : function() {
         var callback = function() {};
 
         httpMock.expects().get("/book/list", callback).toReturn("Book listing");
 
         var productsService = new ProductsService();
         productsService.getCategoryListing("/book/list", callback);
-    end
-end
+    }
+});

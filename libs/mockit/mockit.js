@@ -143,13 +143,10 @@ function DynamicExpectationMatcher() {
 }
 function FrameworkIntegration() {
     this.fail = function(discrepancy) {
-        JSpec.fail(discrepancy.getMessage());
+        fail(discrepancy.getMessage());
     };
 
     this.pass = function(discrepancy) {
-        if (JSpec != undefined) {
-            JSpec.pass();
-        }
     }
 }
 function InvocationBehaviour(caller, method, args) {
@@ -335,7 +332,7 @@ function MockInitialiser() {
     function replaceFunctions(mock, thingToMock) {
         if (typeof(thingToMock) == 'function') {
             createMethods(thingToMock, mock);
-//            createMethods(new thingToMock(), mock);
+            createMethods(new thingToMock(), mock);
         }else if (typeof(thingToMock) == 'object') {
             createMethods(thingToMock, mock);
         }else {

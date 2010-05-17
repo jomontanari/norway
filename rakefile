@@ -1,5 +1,5 @@
 task :default => [:run_tests]
 
 task :run_tests do
-  exec 'jspec run --browsers firefox'
+  exec 'jstestdriver --port 4224 --browser /Applications/Firefox.app/Contents/MacOS/firefox-bin --tests all --captureConsole'
 end

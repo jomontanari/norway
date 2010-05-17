@@ -1,43 +1,43 @@
-describe "Products View"
-    before_each
+TestCase("Products View", {
+    setUp : function() {
         mockControl = new MockControl();
 
         domMock = mockControl.createDynamicMock(Browser.Dom);
-    end
+    }, 
 
-    after_each
+    tearDown : function() {
         mockControl.verify();
-    end
+    }, 
 
-    it "Should add category listing listeners"
+    test_should_add_category_listing_listeners : function() {
         var callback = function() {};
 
         domMock.expects().addClickHandler(ProductsView.Ids.CategoryListingAnchors, callback);
                                      
         var productsView = new ProductsView();
         productsView.addCategoryListingHandlers(callback);
-    end
+    },
 
-    it "Should add the sort listeners"
+    test_should_add_the_sort_listeners : function() {
         var callback = function() {};
 
         domMock.expects().addClickHandler(ProductsView.Ids.SortButton, callback);
 
         var productsView = new ProductsView();
         productsView.addSortHandler(callback);
-    end
+    },
 
-    it "Should return the selected sort option"
+    test_should_return_the_selected_sort_option : function() {
         domMock.expects().getValue(ProductsView.Ids.SortOptions).toReturn("1");
 
         var productsView = new ProductsView();
-        productsView.getSelectedSortOption().should.eql "1"
-    end
+        assertEquals("1", productsView.getSelectedSortOption());
+    },
 
-    it "Should display the passed content listing in the centre of the page"
+    test_should_display_the_passed_content_listing_in_the_centre_of_the_page : function() {
         domMock.expects().setHtml(ProductsView.Ids.ContentArea,"Hello");
 
         var productsView = new ProductsView();
         productsView.setContentListing("Hello");
-    end
-end
+    }
+});
