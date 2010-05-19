@@ -4,11 +4,11 @@ function ShoppingCart() {
 
     this.add = function(item) {
         items.push(item);
-        modifyView(item);
+        modifyShoppingCartViewWithAnAdditional(item);
     };
 
 
-    function modifyView(item) {
+    function modifyShoppingCartViewWithAnAdditional(item) {
         $(".itemList ul").append("<li>");
         $(".itemList ul li:last")
                 .append(item.description)

@@ -1,12 +1,11 @@
 function ProductsSorter() {
     var sortFunctions = initSortFunctions();
 
-    this.
-            sort = function(data, sortType) {
+    this.sort = function(data, sortType) {
         var sorter = sortFunctions[sortType];
 
-        if (sorter == null) {
-            throw new Error("Invalid sort type: " + sortType);    
+        if (!$.isFunction(sorter)) {
+            throw new Error("Invalid sort type: " + sortType);
         }
 
         sorter(data);
@@ -24,14 +23,20 @@ function ProductsSorter() {
     }
 
     function sortByPriceDescending(data) {
-        data.sort(function(a, b) { return a.price - b.price; });
+        data.sort(function(a, b) {
+            return a.price - b.price;
+        });
     }
 
     function sortByPriceAscending(data) {
-        data.sort(function(a, b) { return b.price - a.price; });
+        data.sort(function(a, b) {
+            return b.price - a.price;
+        });
     }
 
     function sortByName(data) {
-        data.sort(function(a, b) { return a.name.localeCompare(b.name); });
+        data.sort(function(a, b) {
+            return a.name.localeCompare(b.name);
+        });
     }
 }
