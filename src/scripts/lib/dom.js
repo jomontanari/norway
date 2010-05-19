@@ -13,5 +13,13 @@ Browser.Dom = {
 
     enable : function(selector) {
         $(selector).removeAttr("disabled");
+    },
+
+    append : function(selector, html) {
+        $(selector).append(html);
+    },
+
+    text : function(selector, text) {
+        $(selector).text(text);
     }
 };
