@@ -17,52 +17,56 @@
         <script type="text/javascript" src="../scripts/shoppingCart.js"></script>
 
         <link rel="stylesheet" href="../css/main.css"/>
+        <link rel="stylesheet" href="../css/content.css"/>
     </head>
 
     <body>
-        <div class="title">
-            <h1>
-                Welcome!
-            </h1>
-        </div>
         <div class="container">
-            <div class="left-hand">
-                    <li>
-                        <a id="book-listing" href="/books/list" class="category-listing">Books</a>
-                    </li>
-                    <li>
-                        <a id="cd-listing" href="/cds/list" class="category-listing">CDs</a>
-                    </li>
-                    <li>
-                        <a id="dvd-listing" href="/dvds/list" class="category-listing">DVDs</a>
-                    </li>
-                </ul>
+            <div class="title">
+                <h1>
+                    Welcome bookworms!
+                </h1>
             </div>
 
-            <div class="centre">
-                <div class="criteria">
-                    <label for="sort-criteria">Sort by:</label>
-                    <select id="sort-criteria" disabled="disabled">
-                        <option value="1" selected="true">Price - ascending</option>
-                        <option value="2">Price - descending</option>
-                        <option value="3">Author</option>
-                    </select>
-                    <input id="sort-button" type="button" value="Go!" disabled="disabled">
+            <div class="centre-content">
+                <div class="menu">
+                    <h3>Categories</h3>
+                    <a id="book-listing" href="/books/list" class="category-listing">&raquo; Books</a>
+                    <br>
+                    <a id="cd-listing" href="/cds/list" class="category-listing">&raquo; CDs</a>
+                    <br>
+                    <a id="dvd-listing" href="/dvds/list" class="category-listing">&raquo; DVDs</a>
+                    <br>
                 </div>
 
-                <div class="content"></div>
-            </div>
 
-            <div class="shoppingCart">
-                <h3>
-                    Shopping Cart
-                </h3>
-                <div class="itemList" >
-                    <ul>
-                    </ul>
-                </div>
-                <br>
-                <div class="totalPrice">
+                <div id="right-two-thirds">
+                    <div class="centre">
+                        <div class="criteria">
+                            <label for="sort-criteria">Sort by:</label>
+                            <select id="sort-criteria" disabled="disabled">
+                                <option value="1" selected="true">Price - ascending</option>
+                                <option value="2">Price - descending</option>
+                                <option value="3">Author</option>
+                            </select>
+                            <input id="sort-button" type="button" value="Go!" disabled="disabled">
+                        </div>
+
+                        <div class="content"></div>
+                    </div>
+
+                    <div class="shoppingCart">
+                        <h3>
+                            Shopping Cart
+                        </h3>
+                        <div class="itemList" >
+                            <ul>
+                            </ul>
+                        </div>
+                        <br>
+                        <div class="totalPrice">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

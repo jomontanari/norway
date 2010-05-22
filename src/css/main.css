@@ -1,77 +1,77 @@
+body {
+    height:100%;
+    /*background:none repeat-y scroll 0 0 #675c47;*/
+    background:none repeat-y scroll 0 0 #77aa77;
+    font-family:Verdana, Arial, Sans-serif;
+}
+
 div.container {
-    position:relative;
-    text-align:left;
+    height:auto;
     width:100%;
+    float:left;
 }
 
 div.title {
-    margin:2px;
+    background: url(../images/bookworm.jpg) no-repeat #fff;
+    margin:           10px;
+    height:           100px;
 }
 
-div.left-hand {
-    background:none repeat scroll 0 0 #ECB9E8;
+div.title h1 {
+    display:block;
+    padding:30px 0 0 130px;
+}
+
+div.centre-content {
+    margin:20px 10px 0 10px;
+}
+
+div.menu {
+    background:none repeat scroll 0 0 #fff;
     float:left;
-    left:-10px;
-    margin:0 0 -10px;
-    padding:10px;
     position:relative;
-    top:-10px;
-    voice-family:inherit;
-    width:200px;
-    z-index:100;
+    width:10%;
+    height:500px;
+    overflow:visible;
 }
 
-div.shoppingCart {
-    background:none repeat scroll 0 0 #D7C4FA;
+div.menu a {
+    text-decoration:none;
+    font-size: 20px;
+    margin-left:15px;
+}
+
+div#right-two-thirds {
     float:right;
-    margin:0 0 -10px;
-    padding:10px;
-    position:relative;
-    right:-10px;
-    top:-10px;
-    voice-family:inherit;
-    width:200px;
-    z-index:99;
+    width:89%;
 }
 
 div.centre {
-    padding:0 240px;
+    width:77%;
+    background:none repeat scroll 0 0 #fff;
+    float:left;
     position:relative;
+    margin-left:10px;
+    margin-right:10px; 
 }
 
 div.criteria {
-    background:lightgray;
+    background:none repeat scroll 0 0 #fff;
 }
 
-table {
-    width:100%;
+div.shoppingCart {
+    background:none repeat scroll 0 0 #fff;
+    float:right;
+    position:relative;
+    width:20%;
+    height:500px;
 }
 
-table tr {
-    border-top: lightgray 1px solid;
-    border-bottom: lightgray 1px solid;
+div.menu a {
+    padding: 2px;
+    font:serif bold;
 }
 
-tr.even {
-    background: lightgray;
+div.shoppingCart h3 {
+    padding:2px;
 }
-
-td.image {
-    width:100px;
-}
-
-td.name {
-    vertical-align:text-top;
-    padding-left: 5px;
-}
-
-td.price {
-    width:80px;
-    text-align:center;
-}
-
-td.buy {
-    width:80px;
-    text-align:center;
-}
-

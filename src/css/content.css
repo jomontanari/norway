@@ -1,0 +1,38 @@
+table {
+    width:100%;
+}
+
+table tr {
+    border-top: lightgray 1px solid;
+    border-bottom: lightgray 1px solid;
+}
+
+tr.even {
+    background: #6699aa;
+}
+
+td.image {
+    width:100px;
+}
+
+td.name {
+    vertical-align:text-top;
+    padding-left: 5px;
+}
+
+td.price {
+    width:80px;
+    text-align:center;
+}
+
+td.buy {
+    width:80px;
+    text-align:center;
+}
+
+h3 {
+    background-color: #3366aa;
+    margin:0;
+    padding:2px;
+    color:#ddffff;
+}
