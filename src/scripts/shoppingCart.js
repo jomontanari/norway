@@ -11,19 +11,8 @@ function ShoppingCart(shoppingCartView, orderCalculator) {
     function modifyShoppingCartViewWithAnAdditional(item) {
         shoppingCartView.modifyShoppingCartViewWithAnAdditional(item);
         shoppingCartView.updateOrderPrice(orderCalculator.calculatePriceFor(items));
-    }
-
-    ;
-
-    function orderPrice() {
-        var price = 0;
-        $.each(items, function(index, value) {
-            price = price + value.price;
-        });
-        return price;
-    }
-
-    ;
+    };
+    
 };
 
 function ShoppingCartView() {
