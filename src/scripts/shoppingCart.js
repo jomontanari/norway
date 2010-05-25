@@ -35,7 +35,6 @@ function ShoppingCartView() {
         Browser.Dom.append(".itemList ul", "<li>");
         Browser.Dom.append(".itemList ul li:last",item.description + " - " + item.price);
         Browser.Dom.append(".totalPrice", "Total price: " + orderPrice());
-        //a good candidate for browser.display ?
     };
 
     this.updateOrderPrice = function(price) {
