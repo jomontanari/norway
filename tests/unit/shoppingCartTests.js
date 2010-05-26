@@ -5,14 +5,16 @@ TestCase("Shopping cart", {
     },
 
     testShouldAddItemToList:function() {
-        var shoppingCartViewMock = mockControl.createDynamicMock(ShoppingCartView);
+        var shoppingCartViewMock = mockControl.createStrictMock(ShoppingCartView);
         var orderCalculatorStub = mockControl.createDynamicMock(OrderCalculator);
 
         var shoppingCart = new ShoppingCart(shoppingCartViewMock, orderCalculatorStub);
 
         var item = {description: "item", price:12};
 
+        var orderPrice = orderCalculatorStub.expects().calculatePriceFor([item]).toReturn(item.price);
         shoppingCartViewMock.expects().modifyShoppingCartViewWithAnAdditional(item);
+        shoppingCartViewMock.expects().updateOrderPrice(item.price);
 
         shoppingCart.add(item);
 
@@ -20,15 +22,14 @@ TestCase("Shopping cart", {
     },
 
     testShouldUpdateTotalPrice:function() {
-        var shoppingCartViewMock = mockControl.createDynamicMock(ShoppingCartView);
-        var orderCalculatorStub = mockControl.createStrictMock(OrderCalculator);
+        var shoppingCartViewStub = mockControl.createDynamicMock(ShoppingCartView);
+        var orderCalculatorMock = mockControl.createStrictMock(OrderCalculator);
 
-        var shoppingCart = new ShoppingCart(shoppingCartViewMock, orderCalculatorStub);
+        var shoppingCart = new ShoppingCart(shoppingCartViewStub, orderCalculatorMock);
 
         var item = {description: "item", price:12};
 
-        orderCalculatorStub.expects().calculatePriceFor([item]).toReturn(item.price);
-        shoppingCartViewMock.expects().updateOrderPrice(item.price);
+        orderCalculatorMock.expects().calculatePriceFor([item]).toReturn(item.price);
 
         shoppingCart.add(item);
 
