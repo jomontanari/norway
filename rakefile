@@ -7,4 +7,9 @@ end
 task :run_tests => :run_javascript_lint do
   puts `ps acxo pid,command | grep firefox | awk '{print $1}' | xargs kill -9`
   puts `jstestdriver --port 4224 --browser /Applications/Firefox.app/Contents/MacOS/firefox-bin --tests all --captureConsole`
+  end
+
+task :run_coverage do
+  puts `ps acxo pid,command | grep firefox | awk '{print $1}' | xargs kill -9`
+  puts `jstestdriver --port 4224 --browser /Applications/Firefox.app/Contents/MacOS/firefox-bin --tests all --captureConsole`
 end

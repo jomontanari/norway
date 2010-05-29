@@ -10,7 +10,5 @@ function ShoppingCart(shoppingCartView, orderCalculator) {
     function modifyShoppingCartViewWithAnAdditional(item) {
         shoppingCartView.modifyShoppingCartViewWithAnAdditional(item);
         shoppingCartView.updateOrderPrice(orderCalculator.calculatePriceFor(items));
-    };
-    
-};
-
+    }
+}

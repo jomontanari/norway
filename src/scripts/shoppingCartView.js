@@ -8,5 +8,5 @@ function ShoppingCartView() {
 
     this.updateOrderPrice = function(price) {
         Browser.Dom.text(".totalPrice", "Total price: " + price);
-    }
-};
+    };
+}

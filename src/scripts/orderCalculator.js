@@ -6,5 +6,5 @@ function OrderCalculator() {
             price = price + value.price;
         });
         return price;
-    }
+    };
 }
