@@ -10,10 +10,7 @@ function ShoppingCart() {
 
     function modifyShoppingCartViewWithAnAdditional(item) {
         $(".itemList ul").append("<li>");
-        $(".itemList ul li:last")
-                .append(item.description)
-                .append(" - ")
-                .append(item.price);
+        $(".itemList ul li:last").append(item.description).append(" - ").append(item.price);
         $(".itemList ul").append("</li>");
 
         $(".totalPrice").text("Total price: " + orderPrice());
@@ -40,7 +37,7 @@ function ShoppingCartView() {
 
     this.updateOrderPrice = function(price) {
         Browser.Dom.text(".totalPrice", "Total price: " + price);
-    }
+    };
 }
 
 

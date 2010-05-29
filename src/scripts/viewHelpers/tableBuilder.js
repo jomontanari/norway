@@ -19,7 +19,7 @@ function TableBuilder(tableHeaders) {
             returnString += "<tbody>";
 
             $.each(items, function(i , anItem) {
-                returnString += '<tr class="' + (i % 2 == 0 ? 'even' : 'odd') + '">';
+                returnString += '<tr class="' + (i % 2 === 0 ? 'even' : 'odd') + '">';
                 returnString += '<td class="image"><img src="' + anItem.image + '" alt="' + anItem.name + '"/></td>';
                 returnString += '<td class="name"><h5>' + anItem.name + '</h5></td>';
                 returnString += '<td class="price">&pound;' + anItem.price + '</td>';
@@ -36,6 +36,5 @@ function TableBuilder(tableHeaders) {
         }
 
         return returnString;
-    }
-    
+    };
 }

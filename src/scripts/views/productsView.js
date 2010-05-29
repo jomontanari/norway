@@ -18,7 +18,7 @@ function ProductsView() {
     this.enableSortOptions = function() {
         Browser.Dom.enable(ProductsView.Ids.SortButton);
         Browser.Dom.enable(ProductsView.Ids.SortOptions);
-    }
+    };
 }
 
 ProductsView.Ids = {
