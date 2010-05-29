@@ -1,5 +1,10 @@
-task :default => [:run_tests]
+task :default => [:run_javascript_lint, :run_tests]
 
-task :run_tests do
-  exec 'jstestdriver --port 4224 --browser /Applications/Firefox.app/Contents/MacOS/firefox-bin --tests all --captureConsole'
+task :run_javascript_lint do
+  puts `./jsl -conf jsl.conf`
+end
+
+task :run_tests => :run_javascript_lint do
+  puts `ps acxo pid,command | grep firefox | awk '{print $1}' | xargs kill -9`
+  puts `jstestdriver --port 4224 --browser /Applications/Firefox.app/Contents/MacOS/firefox-bin --tests all --captureConsole`
 end
