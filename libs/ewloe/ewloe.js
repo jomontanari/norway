@@ -145,9 +145,6 @@ function FrameworkIntegration() {
     this.fail = function(discrepancy) {
         fail(discrepancy.getMessage());
     };
-
-    this.pass = function(discrepancy) {
-    }
 }
 function InvocationBehaviour(caller, method, args) {
     var repeatCount = 1;
@@ -240,8 +237,6 @@ function MockControl(frameworkIntegration) {
                 framework.fail(discrepancy);
             }
         }
-
-        framework.pass();
     };
 }
 function MockHelper() {}
@@ -331,10 +326,10 @@ function MockInitialiser() {
 
     function replaceFunctions(mock, thingToMock) {
         if (typeof(thingToMock) == 'function') {
-            createMethods(thingToMock, mock);
-            createMethods(new thingToMock(), mock);
+            mockMethods(thingToMock, mock);
+            mockMethods(new thingToMock(), mock);
         }else if (typeof(thingToMock) == 'object') {
-            createMethods(thingToMock, mock);
+            mockMethods(thingToMock, mock);
         }else {
             throw new Error("Cannot mock out a " + typeof(thingToMock));
         }
@@ -363,15 +358,15 @@ function MockInitialiser() {
         }
     }
 
-    function createMethods(object, mock) {
+    function mockMethods(object, mock) {
         for (var property in object) {
-            if (MockHelper.isPublicMethod(object, property, mock)) {
-                createMethod(property, mock);
+            if (MockHelper.isPublicMethod(object, property)) {
+                mockMethod(property, mock);
             }
         }
     }
 
-    function createMethod(method, mock) {
+    function mockMethod(method, mock) {
         var mockedFunction = function() {
             if (mock.recording) {
                 mock.recording = false;
