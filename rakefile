@@ -1,7 +1,9 @@
 task :default => [:run_javascript_lint, :run_tests]
 
 task :run_javascript_lint do
-  puts `./jsl -conf jsl.conf`
+  puts %x{./jsl -conf jsl.conf}
+
+  raise "JavascriptLint check failed" unless $?.success?
 end
 
 task :run_tests => :run_javascript_lint do
