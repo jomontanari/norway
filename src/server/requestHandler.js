@@ -54,19 +54,19 @@ function returnCDListing(request, response) {
             id: 1,
             image: "../images/acdc.jpg",
             name: "AC/DC : Iron Man 2",
-            price: 12.99
+            price: 12
         },
         {
             id: 2,
             image: "../images/muse.jpg",
             name: "Muse: Absolution",
-            price: 10.99
+            price: 10
         },
         {
             id: 3,
             image: "../images/iron_maiden.jpg",
             name: "Iron Maiden: Brave New World",
-            price: 5.99
+            price: 5
         }
     ];
     sendResponse(response, JSON.stringify(cds), 200, 'text/plain', 'UTF-8');
@@ -78,19 +78,19 @@ function returnDVDListing(request, response) {
             id: 1,
             image: "../images/sherlock_holmes.jpg",
             name: "Sherlock Holmes",
-            price: 9.99
+            price: 9
         },
         {
             id: 2,
             image: "../images/avatar.jpg",
             name: "Avatar",
-            price: 9.99
+            price: 9
         },
         {
             id: 3,
             image: "../images/2012.jpg",
             name: "2012",
-            price: 9.85
+            price: 9
         }
     ];
     sendResponse(response, JSON.stringify(dvds), 200, 'text/plain', 'UTF-8');
